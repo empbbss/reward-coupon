@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>กรอกรหัสคูปอง</title>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f3f3f3;
+    }
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #283593;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>กรอกรหัสคูปอง</h2>
+    <input type="text" id="couponCode" placeholder="ใส่รหัส เช่น 123123456456789">
+    <br>
+    <button onclick="submitCode()">ดูคูปอง</button>
+  </div>
+
+  <script>
+    function submitCode() {
+      const code = document.getElementById("couponCode").value.trim();
+      if (code) {
+        window.location.href = `coupon.html?code=${encodeURIComponent(code)}`;
+      } else {
+        alert("กรุณากรอกรหัสก่อน");
+      }
+    }
+  </script>
+</body>
+</html>

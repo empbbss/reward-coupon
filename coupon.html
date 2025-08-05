@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แสดงคูปอง</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      background-repeat: repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 24px 20px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c2c54;
+      margin-bottom: 20px;
+    }
+
+    .card-info {
+      text-align: left;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      border-top: 2px dashed #ccc;
+      margin: 20px 0;
+    }
+
+    .qr-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c2c54;
+    }
+
+    .qr-image,
+    .barcode-image {
+      margin: 15px 0;
+    }
+
+    .barcode {
+      font-size: 14px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .note {
+      color: red;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .confirm-btn {
+      background-color: #283593;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      font-size: 24px;
+      color: #aaa;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="close-btn">&times;</div>
+
+  <div class="title">แลกของรางวัล</div>
+
+  <div class="card-info">
+    หมายเลขบัตร : <strong>4130791168</strong><br>
+    S&P : มูลค่า 155 บาท 1 คะแนน
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="qr-title">คิวอาร์โค้ด/บาร์โค้ด</div>
+
+  <div class="qr-image">
+    <img id="qr" src="" alt="QR Code">
+  </div>
+
+  <div class="barcode-image">
+    <img id="barcode" src="" alt="Barcode" width="220" height="50">
+  </div>
+
+  <div class="barcode" id="codeText"></div>
+
+  <div class="note">**สำหรับพนักงานร้านค้าเท่านั้น กดปุ่มเพื่อยืนยันรับสิทธิ์**</div>
+
+  <button class="confirm-btn">สำหรับร้านค้ากดยืนยันรับสิทธิ์</button>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+
+  if (code) {
+    document.getElementById('qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`;
+    document.getElementById('barcode').src = `https://barcode.tec-it.com/barcode.ashx?data=${code}&code=Code128&translate-esc=false`;
+    document.getElementById('codeText').innerText = code;
+  } else {
+    document.body.innerHTML = "<h2 style='text-align:center;'>❌ ไม่พบรหัสคูปอง</h2>";
+  }
+</script>
+
+</body>
+</html>
