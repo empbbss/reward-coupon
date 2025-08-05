@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>กรอกรหัสคูปอง</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: 'Sarabun', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin: 0;
+      padding: 0;
       background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     .form-box {
       background: white;
@@ -18,22 +21,25 @@
       border-radius: 16px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: center;
+      max-width: 90%;
+      width: 360px;
     }
-    input[type="text"] {
+    input {
       padding: 10px;
-      width: 300px;
+      width: 100%;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 16px;
+      margin-bottom: 20px;
     }
     button {
-      margin-top: 15px;
       padding: 10px 20px;
       background-color: #283593;
       color: white;
       border: none;
       font-size: 16px;
       border-radius: 8px;
+      width: 100%;
       cursor: pointer;
     }
   </style>
@@ -41,18 +47,17 @@
 <body>
   <div class="form-box">
     <h2>กรอกรหัสคูปอง</h2>
-    <input type="text" id="couponCode" placeholder="ใส่รหัส เช่น 123123456456789">
-    <br>
+    <input type="text" id="couponCode" placeholder="ใส่รหัส (เช่น 789)">
     <button onclick="submitCode()">ดูคูปอง</button>
   </div>
 
   <script>
     function submitCode() {
       const code = document.getElementById("couponCode").value.trim();
-      if (code) {
+      if (code === "789") {
         window.location.href = `coupon.html?code=${encodeURIComponent(code)}`;
       } else {
-        alert("กรุณากรอกรหัสก่อน");
+        alert("❌ รหัสไม่ถูกต้อง กรุณาลองใหม่");
       }
     }
   </script>

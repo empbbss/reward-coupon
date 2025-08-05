@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>แสดงคูปอง</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
 
@@ -81,26 +82,15 @@
       width: 100%;
       cursor: pointer;
     }
-
-    .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 20px;
-      font-size: 24px;
-      color: #aaa;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="close-btn">&times;</div>
-
   <div class="title">แลกของรางวัล</div>
 
   <div class="card-info">
-    หมายเลขบัตร : <strong>4130791168</strong><br>
+    หมายเลขบัตร : <strong id="cardNumber"></strong><br>
     S&P : มูลค่า 155 บาท 1 คะแนน
   </div>
 
@@ -120,19 +110,22 @@
 
   <div class="note">**สำหรับพนักงานร้านค้าเท่านั้น กดปุ่มเพื่อยืนยันรับสิทธิ์**</div>
 
-  <button class="confirm-btn">สำหรับร้านค้ากดยืนยันรับสิทธิ์</button>
+  <button class="confirm-btn" onclick="confirmUse()">สำหรับร้านค้ากดยืนยันรับสิทธิ์</button>
 </div>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
 
-  if (code) {
-    document.getElementById('qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`;
-    document.getElementById('barcode').src = `https://barcode.tec-it.com/barcode.ashx?data=${code}&code=Code128&translate-esc=false`;
-    document.getElementById('codeText').innerText = code;
-  } else {
-    document.body.innerHTML = "<h2 style='text-align:center;'>❌ ไม่พบรหัสคูปอง</h2>";
+  const cardNumber = Math.floor(Math.random() * 9000000000) + 1000000000;
+
+  document.getElementById('cardNumber').innerText = cardNumber;
+  document.getElementById('codeText').innerText = code;
+  document.getElementById('qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${code}`;
+  document.getElementById('barcode').src = `https://barcode.tec-it.com/barcode.ashx?data=${code}&code=Code128&translate-esc=false`;
+
+  function confirmUse() {
+    window.location.href = "success.html";
   }
 </script>
 
