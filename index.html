@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>กรอกรหัสคูปอง</title>
+  <title>แลกรางวัล</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -15,6 +15,7 @@
       justify-content: center;
       height: 100vh;
     }
+
     .form-box {
       background: white;
       padding: 30px;
@@ -24,14 +25,16 @@
       max-width: 90%;
       width: 360px;
     }
+
     input {
       padding: 10px;
       width: 100%;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
+
     button {
       padding: 10px 20px;
       background-color: #283593;
@@ -42,22 +45,41 @@
       width: 100%;
       cursor: pointer;
     }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
   <div class="form-box">
-    <h2>กรอกรหัสคูปอง</h2>
-    <input type="text" id="couponCode" placeholder="ใส่รหัส (เช่น 789)">
-    <button onclick="submitCode()">ดูคูปอง</button>
+    <h2>แลกรางวัล</h2>
+
+    <input type="text" id="barcode" placeholder="กรอกรหัสบาร์โค้ด">
+    <input type="password" id="password" placeholder="กรอกรหัสผ่าน">
+
+    <button onclick="submitForm()">ดูคูปอง</button>
+
+    <div id="errorMsg" class="error"></div>
   </div>
 
   <script>
-    function submitCode() {
-      const code = document.getElementById("couponCode").value.trim();
-      if (code === "789") {
-        window.location.href = `coupon.html?code=${encodeURIComponent(code)}`;
+    function submitForm() {
+      const barcode = document.getElementById("barcode").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (!barcode) {
+        errorMsg.textContent = "กรุณากรอกรหัสบาร์โค้ด";
+        return;
+      }
+
+      if (password === "789") {
+        window.location.href = `coupon.html?code=${encodeURIComponent(barcode)}`;
       } else {
-        alert("❌ รหัสไม่ถูกต้อง กรุณาลองใหม่");
+        errorMsg.textContent = "❌ รหัสผ่านไม่ถูกต้อง";
       }
     }
   </script>
